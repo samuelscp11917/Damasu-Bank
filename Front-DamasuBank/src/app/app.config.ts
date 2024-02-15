@@ -27,16 +27,16 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
   ]
 };
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    StoreModule.forRoot({ timeState: sessionReducer }), // Configura la tienda principal
-    // ... otros módulos de Angular
-  ],
-  providers: [
-    // ... otros servicios y proveedores
-  ],
-  bootstrap: [AppComponent],
-})
-export class AppModule {}
+// @NgModule({
+//   declarations: [AppComponent],
+//   imports: [
+//     BrowserModule,
+//     StoreModule.forRoot({ timeState: sessionReducer }), // Configura la tienda principal
+//     // ... otros módulos de Angular
+//   ],
+//   providers: [
+//     // ... otros servicios y proveedores
+//   ],
+//   bootstrap: [AppComponent],
+// })
+// export class AppModule {}
