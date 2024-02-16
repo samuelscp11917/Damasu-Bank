@@ -8,3 +8,7 @@ export const startSessionTimer = createAction('[Session] Start Session Timer',
 export const resetSessionTimer = createAction('[Session] Reset Session Timer',);
 export const endSession = createAction('[Session] End Session',
     props<{sessionTime:number}>());
+    export const updateLastActivityTime = createAction(
+        '[Session] Update Last Activity Time',
+        props<{ lastActivityTime: number }>()
+      );

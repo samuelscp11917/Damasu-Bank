@@ -25,18 +25,6 @@ export const appConfig: ApplicationConfig = {
     CdtService, 
     BsModalService, 
     provideStore(),
+    provideState({name: "timeState" , reducer: sessionReducer})
   ]
 };
-// @NgModule({
-//   declarations: [AppComponent],
-//   imports: [
-//     BrowserModule,
-//     StoreModule.forRoot({ timeState: sessionReducer }), // Configura la tienda principal
-//     // ... otros módulos de Angular
-//   ],
-//   providers: [
-//     // ... otros servicios y proveedores
-//   ],
-//   bootstrap: [AppComponent],
-// })
-// export class AppModule {}

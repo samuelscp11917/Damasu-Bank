@@ -22,6 +22,10 @@ export const sessionReducer = createReducer(
     ...state,
     lastActivityTime: Date.now(),
   })),
+  on(sessionActions.updateLastActivityTime, (state, { lastActivityTime }) => ({
+    ...state,
+    lastActivityTime,
+  })),
   on(sessionActions.checkInactivity, (state) => {
     const inactivityTimeout = 5 * 60 * 1000; // 5 minutos en milisegundos
     const elapsedTimeSinceLastActivity = Date.now() - state.lastActivityTime;
