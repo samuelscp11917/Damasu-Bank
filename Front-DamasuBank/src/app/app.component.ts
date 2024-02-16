@@ -22,7 +22,7 @@ export class AppComponent {
 
   private inactivityTimeout = 5 * 60 * 1000; // 5 minutos en milisegundos (ajustable)
   private lastActivityTime:number = Date.now();
-  isAuthenticated: boolean = false; // Asegúrate de que esté declarada aquí
+  isAuthenticated: boolean = true; // Asegúrate de que esté declarada aquí
 
   constructor(private store: Store<AppState>) {}
 
