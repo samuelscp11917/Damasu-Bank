@@ -16,6 +16,7 @@ import { setEtherium } from '../../../Store/Etherium/etherium.actions';
 import { subscribe } from 'node:diagnostics_channel';
 import { validateHeaderValue } from 'node:http';
 import { addTransaction } from '../../../Store/Transaction.actions';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-balance',
@@ -24,7 +25,7 @@ import { addTransaction } from '../../../Store/Transaction.actions';
   templateUrl: './balance.component.html',
   styleUrl: './balance.component.css'
 })
-export class BalanceComponent {
+export class BalanceComponent implements OnInit {
 
   chatConversation: any = [];
 
@@ -169,8 +170,24 @@ export class BalanceComponent {
 
   /*-------------------------*/
 
-  constructor(private Login:LogInService, private transactionsService : TransactionsService , private apiService:ApiService, 
-    private registerService:RegisterService , private formBuilder: FormBuilder , private apistockservice:ApiStockService,
+  // ngOnInit() {
+  //   // Llama al método startInactivityMonitoring
+  //   this.inactivityService.startInactivityMonitoring();
+  // }
+
+  // ngOnDestroy() {
+  //   // Llama al método stopInactivityMonitoring al destruir el componente
+  //   this.inactivityService.stopInactivityMonitoring();
+  // }
+
+  constructor(
+    private Login:LogInService,
+    private transactionsService : TransactionsService ,
+    private apiService:ApiService, 
+    private registerService:RegisterService ,
+    private formBuilder: FormBuilder , 
+    private apistockservice:ApiStockService,
+    private inactivityService: AppComponent,
     private store:Store<AppState> ){
 
     this.chatGptRequest = new FormGroup({
@@ -220,11 +237,7 @@ export class BalanceComponent {
   /*-----------------------------*/
 
   ngOnInit() {
-        this.Login.getinfo().subscribe({
-        next: (user)=>{
-          this.users = user
-        }
-      }),
+    // this.inactivityService.startInactivityMonitoring();
       this.Login.getinfoDataBase().subscribe({
         next: (info)=> {
           this.info = info
@@ -294,7 +307,7 @@ export class BalanceComponent {
           this.store.dispatch(setEtherium({value: info.results[0].c}))
         }
       })
-
+      
   }
 
   checkResponse() {
