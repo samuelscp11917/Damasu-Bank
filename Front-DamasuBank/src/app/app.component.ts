@@ -8,7 +8,6 @@ import { AppState } from './app.state';
 import { Observable, interval, Subscription } from 'rxjs';
 import { take, Subject } from 'rxjs';
 import * as sessionActions from '../app/ngRx/state/session.action';
-import * as tokenActions from './ngRx/state/session.action';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +29,7 @@ export class AppComponent {
 
   constructor(private store: Store<AppState>) {
     this.setTimeout();
-    this.userInactive.subscribe(() => tokenActions.removeToken());
+    this.userInactive.subscribe(() => console.log('user has been inactive for 3s'));
   }
   setTimeout() {
     this.userActivity = setTimeout(() => this.userInactive.next(undefined), 3000);

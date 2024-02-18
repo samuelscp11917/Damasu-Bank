@@ -526,14 +526,14 @@ export class BalanceComponent {
 
 
   }
-  @Injectable({
-    providedIn: 'root',
-  })
-  export class TuServicioOComponente {
-    constructor(private store: Store) {}
+  // @Injectable({
+  //   providedIn: 'root',
+  // })
+  // export class TuServicioOComponente {
+  //   constructor(private store: Store) {}
   
-    removeToken() {
-      this.store.dispatch(tokenActions.removeToken());
-    }
-  }
+  //   removeToken() {
+  //     this.store.dispatch(tokenActions.removeToken());
+  //   }
+  // }
 
