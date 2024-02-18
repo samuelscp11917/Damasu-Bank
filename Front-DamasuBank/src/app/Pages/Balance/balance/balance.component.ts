@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TransactionsService } from '../../../Services/Transactions/transactions.service';
@@ -17,6 +17,8 @@ import { subscribe } from 'node:diagnostics_channel';
 import { validateHeaderValue } from 'node:http';
 import { addTransaction } from '../../../Store/Transaction.actions';
 import { AppComponent } from '../../../app.component';
+import * as tokenActions from '../../../ngRx/state/session.action';
+
 
 @Component({
   selector: 'app-balance',
@@ -25,7 +27,10 @@ import { AppComponent } from '../../../app.component';
   templateUrl: './balance.component.html',
   styleUrl: './balance.component.css'
 })
-export class BalanceComponent implements OnInit {
+@Injectable({
+  providedIn: 'root',
+})
+export class BalanceComponent {
 
   chatConversation: any = [];
 
@@ -188,6 +193,7 @@ export class BalanceComponent implements OnInit {
     private formBuilder: FormBuilder , 
     private apistockservice:ApiStockService,
     private inactivityService: AppComponent,
+    // private balanceService: BalanceService,
     private store:Store<AppState> ){
 
     this.chatGptRequest = new FormGroup({
@@ -328,6 +334,13 @@ export class BalanceComponent implements OnInit {
     this.chatGptHistory.push(historyToPush);
   }
 
+  // this.balanceService.hasToken().subscribe((hasToken) => {
+  //     if (!hasToken) {
+  //       // Si no hay token, realizar acciones necesarias (por ejemplo, redireccionar)
+  //       this.balanceService.removeToken(); // Opcional: Eliminar el token si no está presente
+  //     }
+  //   });
+  // };
   removeToken(){
     localStorage.removeItem("Beaver")
   }
@@ -512,5 +525,15 @@ export class BalanceComponent implements OnInit {
   /*-------------------------------------------------------------*/
 
 
+  }
+  @Injectable({
+    providedIn: 'root',
+  })
+  export class TuServicioOComponente {
+    constructor(private store: Store) {}
+  
+    removeToken() {
+      this.store.dispatch(tokenActions.removeToken());
+    }
   }
 

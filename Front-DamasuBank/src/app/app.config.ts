@@ -15,7 +15,7 @@ import { AppState } from './ngRx/app.state';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from '../app/app.component';
-import { sessionReducer } from './ngRx/state/session.reducer';
+import { tokenReducer } from './ngRx/state/session.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +25,6 @@ export const appConfig: ApplicationConfig = {
     CdtService, 
     BsModalService, 
     provideStore(),
-    provideState({name: "timeState" , reducer: sessionReducer})
+    provideState({name: "timeState" , reducer: tokenReducer})
   ]
 };

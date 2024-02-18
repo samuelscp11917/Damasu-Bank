@@ -1,4 +1,8 @@
-import { Router } from "@angular/router";
+import { Injectable } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+import * as tokenActions from '../ngRx/state/session.action'; 
+import { Router, CanActivate } from "@angular/router";
 
 export const balanceguard = () => {
 

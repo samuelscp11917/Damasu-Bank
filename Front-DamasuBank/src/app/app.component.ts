@@ -8,7 +8,7 @@ import { AppState } from './app.state';
 import { Observable, interval, Subscription } from 'rxjs';
 import { take, Subject } from 'rxjs';
 import * as sessionActions from '../app/ngRx/state/session.action';
-import { userActivityDetected, checkInactivity, startSessionTimer, resetSessionTimer, endSession } from './ngRx/state/session.action';
+import * as tokenActions from './ngRx/state/session.action';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +30,7 @@ export class AppComponent {
 
   constructor(private store: Store<AppState>) {
     this.setTimeout();
-    this.userInactive.subscribe(() => console.log('user has been inactive for 3s'));
+    this.userInactive.subscribe(() => tokenActions.removeToken());
   }
   setTimeout() {
     this.userActivity = setTimeout(() => this.userInactive.next(undefined), 3000);
@@ -41,49 +41,4 @@ export class AppComponent {
     this.setTimeout();
   }
 
-  // startInactivityMonitoring() {
-  //   this.inactivitySubscription = interval(60000)
-  //     .subscribe(() => this.checkInactivity());
-  // }
-
-  // stopInactivityMonitoring() {
-  //   if (this.inactivitySubscription) {
-  //     this.inactivitySubscription.unsubscribe();
-  //   }
-  // }
-
-  // ngOnInit() {
-  //   // ... (otras lógicas de inicialización)
-
-  //   if (this.isAuthenticated) {
-  //     // Utilizando HostListener para escuchar el evento de mouseover
-  //     this.checkInactivity(); // Llamar a checkInactivity al inicio
-
-  //     this.inactivitySubscription = interval(60000)
-  //       .pipe(take(1))
-  //       .subscribe(() => this.checkInactivity());
-  //   }
-  // }
-  // ngOnDestroy() {
-  //   // Desuscribirse al destruir el componente para evitar fugas de memoria
-  //   if (this.inactivitySubscription) {
-  //     this.inactivitySubscription.unsubscribe();
-  //   }
-  // }
-
-  // onUserActivity(event: MouseEvent) {
-  //   const currentTime = Date.now();
-  //   this.store.dispatch(sessionActions.updateLastActivityTime({ lastActivityTime: currentTime }));
-  //   this.lastActivityTime = currentTime;
-  // }
-
-  // private checkInactivity() {
-  //   const elapsedTimeSinceLastActivity = Date.now() - this.lastActivityTime;
-
-  //   if (elapsedTimeSinceLastActivity >= this.inactivityTimeout) {
-  //     // Si ha pasado el tiempo de inactividad, realiza las acciones necesarias
-  //     console.log('Sesión cerrada por inactividad');
-  //     // Aquí podrías agregar la lógica para cerrar la sesión, por ejemplo, navegando a la página de inicio de sesión.
-  //   }
-  // }
 }

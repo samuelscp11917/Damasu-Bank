@@ -1,5 +1,5 @@
-import { SessionState } from "./state/session.reducer"
+import { TokenState } from "./state/session.reducer"
 
 export interface AppState {
-    readonly timeState: SessionState
+    readonly TokenState: "boolean"
 }
