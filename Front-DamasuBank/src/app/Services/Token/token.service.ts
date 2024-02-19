@@ -1,25 +1,31 @@
-// // balance.service.ts
 // import { Injectable } from '@angular/core';
-// import { Store, select } from '@ngrx/store';
-// import * as tokenActions from '../../ngRx/state/session.action';
-// import * as TokenState from '../../ngRx/state/session.reducer';
-// import { Observable } from 'rxjs';
-// import { map } from 'rxjs/operators';
+// import { select, Store } from '@ngrx/store';
+// import { Subject, takeUntil } from 'rxjs';
+// import { logIn, logOut } from '../../ngRx/state/session.action';
+// import { selectAuth } from '../../ngRx/state/session.selector';
 
 // @Injectable({
 //   providedIn: 'root',
 // })
-// export class BalanceService {
-//   constructor(private store: Store) {}
+// export class AuthService {
+//   isLoggedIn = false;
 
-//   hasToken(): Observable<boolean> {
-//     return this.store.pipe(
-//       select('Beaver'),
-//       map((tokenState) => !!tokenState.token)
-//     );
+//   constructor(private readonly store: Store) {
+//     store.pipe(select(selectAuth)).subscribe((isLoggedIn) => {
+//       console.log('Login state: ' + isLoggedIn);
+//       this.isLoggedIn = isLoggedIn;
+//     });
 //   }
 
-//   removeToken() {
-//     this.store.dispatch(tokenActions.removeToken());
+//   isAuthenticated(): boolean {
+//     return this.isLoggedIn;
+//   }
+
+//   authenticate(): void {
+//     this.store.dispatch(logIn({ isLoggedIn: true }));
+//   }
+
+//   logout(): void {
+//     this.store.dispatch(logOut({ isLoggedIn: false }));
 //   }
 // }

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
+import { AppState } from '../../app.state';
+import * as sessionActions from '../../ngRx/state/session.action';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +12,16 @@ import { environment } from '../../../environments/environment.development';
 
 export class RegisterService {
 
-  constructor(private http:HttpClient ) {}
+  constructor(private http:HttpClient, private store: Store<AppState>  ) {}
+  
 
   headers:HttpHeaders = new HttpHeaders({
     "Content-Type":"application/json"
   })
 
   savetoken(token:any){
-    localStorage.setItem("Beaver",token)
+    localStorage.setItem("Beaver",token);
+    // this.store.dispatch(token)
   }
 
   registerUser(name : string , age : number , id: number,  phoneNumber:string, address:string , email: string, password:string): Observable<any>{  

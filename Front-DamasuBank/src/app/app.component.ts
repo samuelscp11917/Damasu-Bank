@@ -4,7 +4,8 @@ import { RouterOutlet } from '@angular/router';
 import { NavBarComponent } from './Components/NavBar/nav-bar/nav-bar.component';
 import { FooterComponent } from './Components/Footer/footer/footer.component';
 import { Store, StoreModule } from '@ngrx/store';
-import { AppState } from './app.state';
+import { AppState } from './ngRx/app.state';
+import { TokenState } from './ngRx/state/session.reducer';
 import { Observable, interval, Subscription } from 'rxjs';
 import { take, Subject } from 'rxjs';
 import * as sessionActions from '../app/ngRx/state/session.action';
@@ -19,9 +20,6 @@ import * as sessionActions from '../app/ngRx/state/session.action';
 export class AppComponent {
   title = 'DamasuBank';
 
-  private inactivityTimeout = 1 * 60 * 1000; // 5 minutos en milisegundos (ajustable)
-  private lastActivityTime:number = Date.now();
-  private inactivitySubscription: Subscription | undefined;
   isAuthenticated: boolean = true; // Asegúrate de que esté declarada aquí
 
   userActivity: any;
@@ -29,7 +27,10 @@ export class AppComponent {
 
   constructor(private store: Store<AppState>) {
     this.setTimeout();
-    this.userInactive.subscribe(() => console.log('user has been inactive for 3s'));
+    this.userInactive.subscribe(() => {
+      console.log('user has been inactive for 10s');
+      // this.store.dispatch(sessionActions.removeToken());
+    });
   }
   setTimeout() {
     this.userActivity = setTimeout(() => this.userInactive.next(undefined), 3000);

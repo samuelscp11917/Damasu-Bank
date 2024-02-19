@@ -1,4 +1,3 @@
-// token.reducer.ts
 import { createReducer, on } from '@ngrx/store';
 import * as tokenActions from './session.action';
 
