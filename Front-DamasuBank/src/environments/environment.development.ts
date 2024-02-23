@@ -1,3 +1,3 @@
 export const environment = {
-    ID_PUBLIC: "3.133.91.148"
+    ID_PUBLIC: "3.143.143.174"
 };
